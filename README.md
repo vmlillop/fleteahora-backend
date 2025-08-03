@@ -1,65 +1,95 @@
-# FleteAhora 🚚
+# 🚚 FleteAhora - Backend
 
-**FleteAhora** es una plataforma digital (backend) diseñada para optimizar el transporte de cargas pequeñas y medianas en Chile. El sistema permite a clientes y transportistas coordinar viajes, evaluar servicios y visualizar el historial de fletes.
+**FleteAhora** es una plataforma digital que permite gestionar y optimizar el transporte de cargas pequeñas y medianas en Chile, conectando usuarios y transportistas de manera eficiente. Este repositorio contiene el backend del sistema, desarrollado con Node.js, Express y Prisma.
 
-## Características 🧩
+---
 
-- Registro y autenticación de usuarios con JWT.
-- Creación y consulta de fletes asociados a cada usuario.
-- Evaluación de servicios prestados (comentarios y puntuaciones).
-- Seguridad mediante middleware de autenticación.
-- Base de datos relacional gestionada con Prisma ORM y PostgreSQL.
+## 🔧 Tecnologías utilizadas
 
-## Estructura del proyecto 🗂️
+- Node.js + Express
+- Prisma ORM + PostgreSQL
+- JSON Web Tokens (JWT) para autenticación
+- Docker + Docker Compose (opcional)
+- Jest para testing (opcional)
+
+---
+
+## 🚀 Instalación
+
+Clona el repositorio y navega a la carpeta:
+
+```bash
+git clone https://github.com/vmlillop/fleteahora-backend.git
+cd fleteahora-backend
+```
+
+Instala las dependencias:
+
+```bash
+npm install
+```
+
+Copia el archivo `.env.example` como `.env` y completa las variables:
+
+```bash
+cp .env.example .env
+```
+
+Ejecuta las migraciones de la base de datos:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+Inicia el servidor en modo desarrollo:
+
+```bash
+npm run dev
+```
+
+---
+
+## 📁 Estructura del proyecto
 
 ```
 fleteahora-backend/
-│
-├── prisma/               # Esquema y migraciones de base de datos
 ├── src/
-│   ├── controllers/      # Lógica de negocio (usuarios, fletes, evaluaciones)
-│   ├── middleware/       # Middleware de autenticación
-│   ├── routes/           # Definición de rutas de la API
-│   └── index.js          # Punto de entrada de la aplicación
-├── .env                  # Variables de entorno (no subir al repositorio)
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── routes/
+│   └── index.js
+├── prisma/
+│   └── schema.prisma
+├── docs/
+│   └── API.md
+├── .env
 ├── .gitignore
-├── LICENSE
-├── package.json
-└── README.md
+├── docker-compose.yml
+└── package.json
 ```
 
-## Requisitos 🔧
+---
 
-- Node.js 18+
-- Docker o PostgreSQL local
-- Prisma CLI
+## 🔑 Variables de entorno (.env)
 
-## Uso 🧪
-
-1. Instalar dependencias:
-   ```bash
-   npm install
-   ```
-
-2. Configurar `.env`:
-   ```
-   DATABASE_URL="postgresql://usuario:clave@localhost:5432/fleteahora"
-   JWT_SECRET="clave_secreta_segura"
-   ```
-
-3. Ejecutar migraciones:
-   ```bash
-   npx prisma migrate dev --name init
-   ```
-
-4. Iniciar servidor:
-   ```bash
-   npm start
-   ```
-
-## Licencia 📄
-
-Distribuido bajo la Licencia MIT. Ver `LICENSE` para más información.
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/fleteahora
+JWT_SECRET=tu_secreto_super_secreto
+PORT=3000
+```
 
 ---
-Desarrollado con ❤️ por Víctor Lillo – 2025
+
+## 🧪 Scripts útiles
+
+```bash
+npm run dev        # Inicia el servidor en modo desarrollo
+npm run start      # Inicia el servidor en producción
+npm run test       # Ejecuta los tests (si configurado)
+```
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para más información.
