@@ -30,4 +30,16 @@ model Flete {
   estado     String   @default("pendiente")
   usuarioId  Int
   usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  evaluaciones Evaluacion[] // Relación uno-a-muchos
+}
+
+model Evaluacion {
+  id         Int      @id @default(autoincrement())
+  comentario String
+  puntuacion Int
+  fecha      DateTime @default(now())
+
+  // Relaciones
+  fleteId    Int
+  flete      Flete    @relation(fields: [fleteId], references: [id])
 }
