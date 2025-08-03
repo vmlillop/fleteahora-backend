@@ -1,0 +1,33 @@
+// Cargar la URL desde el archivo .env
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Modelo de Usuario
+model Usuario {
+  id       Int     @id @default(autoincrement())
+  nombre   String
+  correo   String  @unique
+  password String
+  rol      String
+  clave    String  // Este campo debe estar aquí
+  fletes   Flete[]
+}
+
+
+
+// Modelo de Flete
+model Flete {
+  id         Int      @id @default(autoincrement())
+  origen     String
+  destino    String
+  fecha      DateTime
+  estado     String   @default("pendiente")
+  usuarioId  Int
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+}
