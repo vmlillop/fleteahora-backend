@@ -1,22 +1,21 @@
 {
   "name": "fleteahora-backend",
-  "type": "module",
   "version": "1.0.0",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "prisma": "npx prisma"
+    "dev": "nodemon src/index.js",
+    "postinstall": "npx prisma migrate deploy"
   },
   "dependencies": {
-    "@prisma/client": "^6.13.0",
-    "bcrypt": "^5.1.0",
-    "dotenv": "^16.1.4",
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "prisma": "^5.0.0",
+    "@prisma/client": "^5.0.0",
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "prisma": "^6.13.0"
+    "nodemon": "^3.0.1"
   }
 }
