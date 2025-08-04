@@ -1,6 +1,6 @@
 # 🚚 FleteAhora - Backend
 
-**FleteAhora** es una plataforma digital que permite gestionar y optimizar el transporte de cargas pequeñas y medianas en Chile, conectando usuarios y transportistas de manera eficiente. Este repositorio contiene el backend del sistema, desarrollado con Node.js, Express y Prisma.
+*FleteAhora* es una plataforma digital que permite gestionar y optimizar el transporte de cargas pequeñas y medianas en Chile, conectando usuarios y transportistas de manera eficiente. Este repositorio contiene el backend del sistema, desarrollado con Node.js, Express y Prisma.
 
 ---
 
