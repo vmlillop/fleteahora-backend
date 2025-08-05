@@ -90,6 +90,6 @@ npm run test       # Ejecuta los tests (si configurado)
 
 ---
 
-## 📄 Licencia
+## 📄 Licencia (solo para que haga push)
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para más información.
