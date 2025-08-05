@@ -6,8 +6,10 @@ import authRoutes from './routes/authRoutes.js';
 import protectedRoutes from './routes/protectedRoutes.js';
 import evaluacionRoutes from './routes/evaluacionRoutes.js';
 
-
 dotenv.config();
+
+console.log("DATABASE_URL en runtime:", process.env.DATABASE_URL);
+
 const app = express();
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
