@@ -1,6 +1,6 @@
 import express from 'express';
 import { crearFlete, obtenerMisFletes } from '../controllers/fleteController.js';
-import { verificarToken } from '../middleware/authMiddleware.js';
+import { verificarToken } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
