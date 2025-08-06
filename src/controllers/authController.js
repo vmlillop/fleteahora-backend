@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export const register = async (req, res) => {
   try {
-    const { nombre, correo, password, rol } = req.body;
+    const { nombre, email, password, rol } = req.body; // email viene del cliente
 
     if (!password) {
       return res.status(400).json({ error: 'La contraseña es obligatoria' });
@@ -14,13 +14,13 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const nuevoUsuario = await prisma.usuario.create({
+    const nuevoUsuario = await prisma.Usuario.create({
       data: {
         nombre,
-        correo,
+        correo: email,               // Mapeo a campo del schema
         password: hashedPassword,
-        rol,
-        clave: '1234'  // <--- ESTE CAMPO ES OBLIGATORIO
+        rol: rol || 'usuario',       // Valor por defecto
+        clave: '1234'                 // Obligatorio según schema
       }
     });
 
@@ -30,11 +30,11 @@ export const register = async (req, res) => {
   }
 };
 
-
 export const login = async (req, res) => {
   try {
-    const { correo, password } = req.body;
-    const usuario = await prisma.usuario.findUnique({ where: { correo } });
+    const { email, password } = req.body; // email viene del cliente
+    const usuario = await prisma.Usuario.findUnique({ where: { correo: email } });
+
     if (!usuario || !(await bcrypt.compare(password, usuario.password))) {
       return res.status(401).json({ error: 'Credenciales inválidas' });
     }
