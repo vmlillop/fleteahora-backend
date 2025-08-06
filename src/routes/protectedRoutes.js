@@ -1,11 +1,18 @@
+// src/routes/protectedRoutes.js
+
 import express from 'express';
-import { verificarToken as authMiddleware } from '../middleware/authMiddleware.js';
+import { verificarToken } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/perfil', authMiddleware, (req, res) => {
-  res.json({ mensaje: 'Acceso autorizado', usuario: req.usuario });
+router.get('/', verificarToken, (req, res) => {
+  res.json({
+    mensaje: 'Acceso concedido a ruta protegida',
+    usuario: req.usuario
+  });
 });
 
 export default router;
+
+
 
