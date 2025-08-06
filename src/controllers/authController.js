@@ -11,7 +11,6 @@ export const register = async (req, res) => {
     if (!password) {
       return res.status(400).json({ error: 'La contraseña es obligatoria' });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const nuevoUsuario = await prisma.Usuario.create({
