@@ -18,4 +18,3 @@ export const verificarToken = (req, res, next) => {
     next();
   });
 };
-
