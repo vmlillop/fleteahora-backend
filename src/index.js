@@ -12,7 +12,9 @@ console.log("DATABASE_URL en runtime:", process.env.DATABASE_URL);
 
 const app = express();
 const prisma = new PrismaClient();
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
