@@ -1,41 +1,51 @@
-import fleteRoutes from './routes/fleteRoutes.js';
-import express from 'express';
-import dotenv from 'dotenv';
-import { PrismaClient } from '@prisma/client';
-import authRoutes from './routes/authRoutes.js';
-import protectedRoutes from './routes/protectedRoutes.js';
-import evaluacionRoutes from './routes/evaluacionRoutes.js';
+sudo -u ec2-user bash -lc 'cat > /home/ec2-user/app/src/index.js << "JS"
+import express from "express";
+import dotenv from "dotenv";
+import { PrismaClient } from "@prisma/client";
+
+// Rutas existentes en tu repo
+import fleteRoutes from "./routes/fleteRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import protectedRoutes from "./routes/protectedRoutes.js";
+import evaluacionRoutes from "./routes/evaluacionRoutes.js";
 
 dotenv.config();
 
-console.log("DATABASE_URL en runtime:", process.env.DATABASE_URL);
-
 const app = express();
 const prisma = new PrismaClient();
-// const PORT = process.env.PORT;
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 8080;
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
-});
-
+// Middlewares
 app.use(express.json());
 
-app.use('/api/auth', authRoutes);
-app.use('/api/fletes', fleteRoutes);
-app.use('/api/protegido', protectedRoutes);
-app.use('/api/evaluaciones', evaluacionRoutes);
+// Rutas
+app.use("/api/auth", authRoutes);
+app.use("/api/fletes", fleteRoutes);
+app.use("/api/protegido", protectedRoutes);
+app.use("/api/evaluaciones", evaluacionRoutes);
 
-
-app.get('/', (req, res) => {
-  res.send('API FleteAhora activa');
+// Salud
+app.get("/health", (_req, res) => {
+  res.status(200).json({ ok: true, status: "healthy" });
 });
 
+// Raíz
+app.get("/", (_req, res) => {
+  res.status(200).send("API FleteAhora activa");
+});
+
+// Arranque único (NO duplicar)
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
+  console.log("DATABASE_URL en runtime:", process.env.DATABASE_URL);
 });
 
-
-// Línea al final del archivo
-console.log("Aplicación actualizada");
+// Manejo básico de errores
+process.on("unhandledRejection", (reason) => {
+  console.error("Unhandled Rejection:", reason);
+});
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+JS'
